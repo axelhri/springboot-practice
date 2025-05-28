@@ -3,32 +3,29 @@ package com.example.demo.student;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.UUID;
 
 @Entity
 @Table
 public class Student {
     @Id
-    @SequenceGenerator(
-            name = "student_sequence",
-            sequenceName = "student_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "student_sequence"
-    )
-    private Long id;
+    private UUID id;
     private String name;
     private String email;
     private LocalDate dob;
+    @Transient
     private Integer age;
 
-    public Student(Long id, String name, String email, LocalDate dob, Integer age) {
-        this.id = id;
+    public Student() {
+        this.id = UUID.randomUUID();
+    }
+
+    public Student(String name, String email, LocalDate dob) {
+        this.id = UUID.randomUUID();
         this.name = name;
         this.email = email;
         this.dob = dob;
-        this.age = age;
     }
 
     public String getName() {
@@ -39,11 +36,11 @@ public class Student {
         this.name = name;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -64,7 +61,7 @@ public class Student {
     }
 
     public Integer getAge() {
-        return age;
+        return Period.between(this.dob, LocalDate.now()).getYears();
     }
 
     public void setAge(Integer age) {
