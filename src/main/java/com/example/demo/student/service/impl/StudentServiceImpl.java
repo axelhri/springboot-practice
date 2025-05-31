@@ -8,5 +8,5 @@ public interface StudentServiceImpl {
     List<StudentDTO> getStudents();
     void addNewStudent(StudentDTO studentDTO);
     void deleteStudent(UUID studentId);
-    public void updateStudent(UUID studentId, StudentDTO studentDTO);
+    void updateStudent(UUID studentId, StudentDTO studentDTO);
 }
