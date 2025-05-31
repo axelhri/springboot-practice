@@ -1,32 +1,15 @@
-package com.example.demo.student;
-
-import jakarta.persistence.*;
+package com.example.demo.student.dto;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.UUID;
 
-@Entity
-@Table
-public class Student {
-    @Id
+public class StudentDTO {
     private UUID id;
     private String name;
     private String email;
     private LocalDate dob;
-    @Transient
     private Integer age;
-
-    public Student() {
-        this.id = UUID.randomUUID();
-    }
-
-    public Student(String name, String email, LocalDate dob) {
-        this.id = UUID.randomUUID();
-        this.name = name;
-        this.email = email;
-        this.dob = dob;
-    }
 
     public String getName() {
         return name;

@@ -1,5 +1,7 @@
-package com.example.demo.student;
+package com.example.demo.student.controller;
 
+import com.example.demo.student.dto.StudentDTO;
+import com.example.demo.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +11,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping(path = "api/v1/student")
 public class StudentController {
+
     private final StudentService studentService;
 
     @Autowired
@@ -17,13 +20,13 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Student> getStudents() {
+    public List<StudentDTO> getStudents() {
         return studentService.getStudents();
     }
 
     @PostMapping
-    public void registerNewStudent(@RequestBody Student student) {
-        studentService.addNewStudent(student);
+    public void registerNewStudent(@RequestBody StudentDTO studentDTO) {
+        studentService.addNewStudent(studentDTO);
     }
 
     @DeleteMapping(path = "{studentId}")
@@ -32,8 +35,9 @@ public class StudentController {
     }
 
     @PutMapping(path = "{studentId}")
-    public void updateStudent(@PathVariable("studentId") UUID studentId,
-                              @RequestBody Student request) {
-        studentService.updateStudent(studentId, request.getName(), request.getEmail());
+    public void updateStudent(
+            @PathVariable UUID studentId,
+            @RequestBody StudentDTO studentDTO) {
+        studentService.updateStudent(studentId, studentDTO);
     }
 }
