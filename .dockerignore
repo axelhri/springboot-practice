@@ -1,0 +1,28 @@
+# Ignorer les répertoires et fichiers de développement
+**/target/
+**/.git/
+**/.gitignore
+**/.github/
+**/.vscode/
+**/.idea/
+**/node_modules/
+**/.DS_Store
+
+# Ignorer les fichiers de configuration locaux
+**/.env
+**/docker-compose.yml
+**/docker-compose.override.yml
+
+# Ignorer les fichiers de logs et temporaires
+**/*.log
+**/tmp/
+**/temp/
+
+# Ignorer les fichiers de documentation
+**/README.md
+**/docs/
+
+# Ignorer les fichiers de configuration de l'IDE
+**/*.iml
+**/*.ipr
+**/*.iws
