@@ -49,9 +49,6 @@ class StudentServiceTest {
     void addNewStudentSuccessfullyTest() {
 
         /* Arrange */
-        Mockito.when(studentRepository.findStudentByEmail("axel@gmail.com"))
-                .thenReturn(Optional.empty());
-
         Mockito.when(studentMapper.toEntity(studentDTO))
                 .thenReturn(studentEntity);
 
