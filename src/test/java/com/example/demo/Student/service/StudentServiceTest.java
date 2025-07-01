@@ -1,4 +1,4 @@
-package com.example.demo.Student;
+package com.example.demo.Student.service;
 
 import com.example.demo.student.dto.StudentDTO;
 import com.example.demo.student.mapper.StudentMapper;
