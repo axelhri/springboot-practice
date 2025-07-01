@@ -19,5 +19,5 @@ jobs:
         java-version: '24'
         distribution: 'temurin'
         cache: maven
-      - name: Build and run tests
-        run: mvn -B clean verify
+    - name: Build and run tests
+      run: mvn -B clean verify
