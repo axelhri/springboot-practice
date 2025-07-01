@@ -18,3 +18,8 @@ jobs:
 
       - name: Run Tests
         run: mvn test -X
+
+      - name: Show surefire reports on failure
+        if: failure()
+        run: cat target/surefire-reports/*.txt || true
+
