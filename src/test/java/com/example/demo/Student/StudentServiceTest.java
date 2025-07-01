@@ -16,7 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.Optional;
-import java.util.UUID;
 
 @ExtendWith(MockitoExtension.class)
 class StudentServiceTest {
@@ -36,13 +35,11 @@ class StudentServiceTest {
     @BeforeEach
     void setup() {
         studentDTO = new StudentDTO();
-        studentDTO.setId(UUID.randomUUID());
         studentDTO.setName("Axel");
         studentDTO.setEmail("axel@gmail.com");
         studentDTO.setDob(LocalDate.of(2000, 4, 3));
 
         studentEntity = new Student();
-        studentEntity.setId(UUID.randomUUID());
         studentEntity.setName("Axel");
         studentEntity.setEmail("axel@gmail.com");
         studentEntity.setDob(LocalDate.of(2000, 4, 3));
