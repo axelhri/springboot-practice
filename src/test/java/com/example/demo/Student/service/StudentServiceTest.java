@@ -65,9 +65,9 @@ class StudentServiceTest {
         Mockito.when(studentRepository.findById(studentEntity.getId())).thenReturn(Optional.of(studentEntity));
 
         /* Act */
-        String result = studentService.getStudent(studentEntity.getId());
+        Student result = studentService.getStudent(studentEntity.getId());
 
         /* Assert */
-        Assertions.assertEquals("Axel", result);
+        Assertions.assertEquals("Axel", result.getName());
     }
 }
