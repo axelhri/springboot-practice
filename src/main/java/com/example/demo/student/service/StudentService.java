@@ -35,6 +35,11 @@ public class StudentService implements StudentServiceImpl {
     }
 
     @Override
+    public String getStudent(UUID studentId) {
+        return studentRepository.findById(studentId).map(Student::getName).orElse("L'étudiant n'éxiste pas");
+    }
+
+    @Override
     public void addNewStudent(StudentDTO studentDTO) {
         Optional<Student> studentByEmail = studentRepository.findStudentByEmail(studentDTO.getEmail());
         if (studentByEmail.isPresent()) {

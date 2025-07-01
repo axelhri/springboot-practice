@@ -26,6 +26,11 @@ public class StudentController {
         return studentService.getStudents();
     }
 
+    @GetMapping(path = "{studentId}")
+    public String getStudent(UUID studentId) {
+        return studentService.getStudent(studentId);
+    }
+
     @PostMapping
     public ResponseEntity<String> registerNewStudent(@RequestBody StudentDTO studentDTO) {
         studentService.addNewStudent(studentDTO);
