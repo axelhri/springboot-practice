@@ -68,6 +68,6 @@ class StudentServiceTest {
         Student result = studentService.getStudent(studentEntity.getId());
 
         /* Assert */
-        Assertions.assertEquals("Axel", result.getName());
+        Assertions.assertEquals("axel", result.getName());
     }
 }
