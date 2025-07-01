@@ -1,6 +1,7 @@
 package com.example.demo.student.controller;
 
 import com.example.demo.student.dto.StudentDTO;
+import com.example.demo.student.model.Student;
 import com.example.demo.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class StudentController {
     }
 
     @GetMapping(path = "{studentId}")
-    public String getStudent(UUID studentId) {
+    public Student getStudent(@PathVariable UUID studentId) {
         return studentService.getStudent(studentId);
     }
 

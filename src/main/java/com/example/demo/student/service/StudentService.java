@@ -35,8 +35,9 @@ public class StudentService implements StudentServiceImpl {
     }
 
     @Override
-    public String getStudent(UUID studentId) {
-        return studentRepository.findById(studentId).map(Student::getName).orElse("L'étudiant n'éxiste pas");
+    public Student getStudent(UUID studentId) {
+        return studentRepository.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("Étudiant introuvable"));
     }
 
     @Override
