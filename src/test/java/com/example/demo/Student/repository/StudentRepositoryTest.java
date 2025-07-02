@@ -1,6 +1,7 @@
 package com.example.demo.Student.repository;
 
 import com.example.demo.student.dto.StudentDTO;
+import com.example.demo.student.mapper.StudentMapper;
 import com.example.demo.student.model.Student;
 import com.example.demo.student.repository.StudentRepository;
 import com.example.demo.student.service.StudentService;
@@ -22,9 +23,29 @@ class StudentRepositoryTest {
     @Autowired
     private StudentService testService;
 
+    @Autowired
+    private StudentMapper testMapper;
+
     @AfterEach
     void cleanTests() {
         testRepo.deleteAll();
+    }
+
+    @Test
+    void createNewStudentTestSuccessfully() {
+        /* Arrange */
+        Student newStudent = new Student("Absalom","abs@gmail.com",LocalDate.of(1920,6,4));
+        StudentDTO newStudentDTO = testMapper.toDto(newStudent);
+
+        /* Act */
+        testService.addNewStudent(newStudentDTO);
+        Optional<Student> result = testRepo.findStudentByEmail("abs@gmail.com");
+
+        /* Assert */
+        assertNotNull(result);
+        assertEquals(newStudent.getName(), result.get().getName());
+        assertEquals(newStudent.getEmail(), result.get().getEmail());
+        assertEquals(newStudent.getDob(), result.get().getDob());
     }
 
     @Test
