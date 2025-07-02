@@ -28,7 +28,7 @@ class StudentRepositoryTest {
     }
 
     @Test
-    void updateStudentTest() {
+    void updateStudentTestSuccessfully() {
 
         /* Arrange */
         Student studentToUpdate = new Student("Jean-Pierre","jp@gmail.com",LocalDate.of(1970,12,21));
@@ -42,8 +42,24 @@ class StudentRepositoryTest {
 
         /* Assert */
         Optional<Student> updatedStudent = testRepo.findById(studentToUpdate.getId());
-        assertTrue(updatedStudent.isPresent());
         assertEquals(newName, updatedStudent.get().getName());
+    }
+
+    @Test
+    void updateStudentTestError() {
+        /* Arrange */
+        Student studentToUpdate = new Student("Jean-Pierre","jp@gmail.com",LocalDate.of(1970,12,21));
+        testRepo.save(studentToUpdate);
+        String newName = "Michel";
+        StudentDTO updatedDTO = new StudentDTO();
+        updatedDTO.setName("Gilbert");
+
+        /* Act */
+        testService.updateStudent(studentToUpdate.getId(), updatedDTO);
+
+        /* Assert */
+        Optional<Student> updatedStudent = testRepo.findById(studentToUpdate.getId());
+        assertNotEquals(newName, updatedStudent.get().getName());
     }
 
     @Test
@@ -61,7 +77,6 @@ class StudentRepositoryTest {
         Optional<Student> foundStudent = testRepo.findStudentByEmail(email);
 
         /* Assert */
-        assertTrue(foundStudent.isPresent());
         assertEquals(email, foundStudent.get().getEmail());
     }
 }
