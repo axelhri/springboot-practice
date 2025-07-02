@@ -1,7 +1,10 @@
 package com.example.demo.Student.repository;
 
+import com.example.demo.student.dto.StudentDTO;
 import com.example.demo.student.model.Student;
 import com.example.demo.student.repository.StudentRepository;
+import com.example.demo.student.service.StudentService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +18,33 @@ import static org.junit.jupiter.api.Assertions.*;
 class StudentRepositoryTest {
     @Autowired
     private StudentRepository testRepo;
+
+    @Autowired
+    private StudentService testService;
+
+    @AfterEach
+    void cleanTests() {
+        testRepo.deleteAll();
+    }
+
+    @Test
+    void updateStudentTest() {
+
+        /* Arrange */
+        Student studentToUpdate = new Student("Jean-Pierre","jp@gmail.com",LocalDate.of(1970,12,21));
+        testRepo.save(studentToUpdate);
+        String newName = "Michel";
+        StudentDTO updatedDTO = new StudentDTO();
+        updatedDTO.setName(newName);
+
+        /* Act */
+        testService.updateStudent(studentToUpdate.getId(), updatedDTO);
+
+        /* Assert */
+        Optional<Student> updatedStudent = testRepo.findById(studentToUpdate.getId());
+        assertTrue(updatedStudent.isPresent());
+        assertEquals(newName, updatedStudent.get().getName());
+    }
 
     @Test
     void testFindStudentByEmail() {

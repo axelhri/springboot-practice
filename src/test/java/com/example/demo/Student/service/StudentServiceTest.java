@@ -5,6 +5,7 @@ import com.example.demo.student.mapper.StudentMapper;
 import com.example.demo.student.model.Student;
 import com.example.demo.student.repository.StudentRepository;
 import com.example.demo.student.service.StudentService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,12 +46,16 @@ class StudentServiceTest {
         studentEntity.setDob(LocalDate.of(2000, 4, 3));
     }
 
+    @AfterEach
+    void cleanTests() {
+        studentRepository.deleteAll();
+    }
+
     @Test
     void addNewStudentSuccessfullyTest() {
 
         /* Arrange */
-        Mockito.when(studentMapper.toEntity(studentDTO))
-                .thenReturn(studentEntity);
+        Mockito.when(studentMapper.toEntity(studentDTO)).thenReturn(studentEntity);
 
         /* Act */
         studentService.addNewStudent(studentDTO);

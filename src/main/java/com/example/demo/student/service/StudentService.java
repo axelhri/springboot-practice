@@ -29,15 +29,12 @@ public class StudentService implements StudentServiceImpl {
 
     @Override
     public List<StudentDTO> getStudents() {
-        return studentRepository.findAll().stream()
-                .map(studentMapper::toDto)
-                .collect(Collectors.toList());
+        return studentRepository.findAll().stream().map(studentMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public Student getStudent(UUID studentId) {
-        return studentRepository.findById(studentId)
-                .orElseThrow(() -> new RuntimeException("Étudiant introuvable"));
+        return studentRepository.findById(studentId).orElseThrow(() -> new RuntimeException("Étudiant introuvable"));
     }
 
     @Override
